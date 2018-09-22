@@ -1,4 +1,12 @@
-https://stepik.org/course/551/
+[Курс "Базы данных"](https://stepik.org/course/551/syllabus)
+
+1. Введение и базовые операции SQL
+
+    1.1 Термины и определения
+
+    1.2 Базовые операции
+    
+    1.3 Аггрегация данных
 
 # 1. Введение и базовые операции SQL
 
@@ -19,6 +27,91 @@ https://stepik.org/course/551/
 * Диспетчер данных - транзакции, кэш
 * Диспетчер запросов - парсер запроса, оптимизатор, исполнитель
 * Набор инструментов для служебных операций - резервное копирование, восстановление, мониторинг
+
+## 1.2 Базовые операции
+
+### 1.2.1 Выборка данных (SELECT)
+
+Выбрать все данные из таблицы `billing`.
+
+```SQL
+SELECT * FROM billing;
+```
+
+Выбрать столбцы `name` и `total` из таблицы `billing`, чтобы значение`total` было больше 900
+
+```SQL
+SELECT email, total FROM billing WHERE total > 900;
+```
+
+Условия, заданные при помощи ключевого слова **WHERE** можно комбинировать с помощью ключевого слова **AND**.
+
+```SQL
+SELECT email, total FROM billing WHERE total > 900 AND currency='USD';
+```
+
+Для указания нескольких вариантов значения атрибута, можно использовать конструкцию _IN()_.
+
+```SQL
+SELECT email, total FROM billing WHERE total > 900 AND currency IN('USD', 'EUR');
+```
+
+Если нужно исключить конкретные значения атрибута, можно использовать _NOT_.
+
+```SQL
+SELECT email, total FROM billing WHERE total > 900 AND currency NOT IN('USD', 'EUR');
+```
+
+###  1.2.2 Добавление записи (INSERT)
+
+Добавим новую запись в таблицу `billing`. По умолчанию нужно указать значения всех атрибутов в том же порядке, в котором они были расположены, когда создавалась таблица.
+
+```SQL
+INSERT INTO billing VALUES(
+    'iamgroot@mail.ru',
+    'tor@mail.ru',
+    '500.00', 'USD',
+    '2012-08-15',
+    'Hello, Tor! I am groot.'
+);
+```
+
+После названия таблицы можно указать конкретные атрибуты, которые нужно вставить.
+
+```SQL
+INSERT INTO billing(
+    payer_email, recepient_email,
+    sum, currency, billing_date
+)
+) VALUES(
+    'iamgroot@mail.ru',
+    'tor@mail.ru',
+    '500.00', 'USD',
+    '2012-08-15'
+);
+```
+
+### 1.2.3 Обновление записей (UPDATE)
+
+Можно обновить атрибут `currency` для всех записей в таблице `billing` с помощью ключевого слова **SET**.
+
+```SQL
+UPDATE billing SET currency='USD';
+```
+
+Указать какие именно кортежи следует обновлять можно с помощью ключевого слова **WHERE**.
+
+```SQL
+UPDATE billing SET currency='USD' WHERE payer_email='iamgroot@mail.ru';
+```
+
+### 1.2.4 Удаление записей (DELETE)
+
+Удалить запись можно с помощью ключевого слова **DELETE**.
+
+```SQL
+DELETE FROM billing WHERE payer_email IS NULL OR payer_email='';
+```
 
 ## 1.3 Аггрегация данных
 
