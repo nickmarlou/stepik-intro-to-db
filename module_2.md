@@ -119,7 +119,7 @@ SELECT * FROM product, category;
 SELECT * FROM product CROSS JOIN category;
 ```
 
-### Тета-соединение. INNER JOIN, NATURAL JOIN
+### Тета-соединение или внутреннее соединение (INNER JOIN, NATURAL JOIN)
 
 ```sql
 # В качестве результата соединения возвращается подмножество кортежей из декартова произведения, которое удовлетворяем определенному условию (равеноство атрибута category_id)
@@ -133,4 +133,29 @@ SELECT product.product_name, product.price, category.category_name FROM product
 	INNER JOIN category ON product.category_id = category.category_id;
 ```
 
+### Левое и правое внешние соединения (LEFT OUTER JOIN, RIGHT OUTER JOIN)
 
+Результат левого (правого) внешнего соединения содержит кортежи из внутреннего соединения источников и не вошедшие во внутреннее соединение кортежи левого (правого) источника.
+
+Атрибуты, которые не имеют совпадений по общим столбцам заполняются неопределенными значениями.
+
+Если по указанному атрибуту нет совпадений, для *LEFT OUTER JOIN* отсутствующие значения из правой таблицы заполняются *null*. Для *RIGHT OUTER JOIN* - наоборот.
+
+```sql
+# Пример левого внешнего соединения
+
+USE store_medium;
+
+SELECT * FROM category as c LEFT OUTER JOIN product as p on p.category_id = c.category_id;
+```
+
+### Объединение (UNION)
+
+```sql
+# Пример объединения двух множеств
+USE store_medium;
+
+SELECT * FROM product where price < 100
+union
+SELECT * FROM product where price > 900;
+```
