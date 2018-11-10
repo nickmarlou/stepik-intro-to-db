@@ -44,3 +44,13 @@ JOIN good ON good.id=sale_has_good.good_id;
 Последовательность, в которой столбцы представлены в **составном индексе**, достаточно важна. Дело в том, что получить набор данных по запросу, затрагивающему только первый из проиндексированных столбцов, можно. Однако в большинстве СУБД невозможно или неэффективно получение данных только по второму и далее проиндексированным столбцам (без ограничений на первый столбец).
 
 > Индексы могут быть реализованы различными структурами. Наиболее часто употребимы [B*-деревья](https://ru.wikipedia.org/wiki/B*-%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE), [B+-деревья](https://ru.wikipedia.org/wiki/B%2B-%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE), [B-деревья](https://ru.wikipedia.org/wiki/B-%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE) и хеши.
+
+Информация о хэшировании и хэш-таблицах:
+* [Алгоритмы. Структуры данных. Хеш-таблицы](https://www.youtube.com/watch?v=E6oY2EcMi9Y)
+* [CS50 Hash tables](https://www.youtube.com/watch?v=nvzVHwrrub0)
+* [Информатика. Структуры данных: Хеширование и хеш-функция](https://www.youtube.com/watch?v=BtBxtoXBI54)
+* [What is a HashTable Data Structure - Introduction to Hash Tables , Part 0](https://www.youtube.com/watch?v=MfhjkfocRR0)
+
+## Создание индексов
+
+[explain join types](https://dev.mysql.com/doc/refman/8.0/en/explain-output.html#explain-join-types)
